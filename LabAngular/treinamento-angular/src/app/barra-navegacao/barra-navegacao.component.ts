@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { browser } from 'protractor';
 
 @Component({
   selector: 'app-barra-navegacao',
@@ -16,5 +17,9 @@ export class BarraNavegacaoComponent implements OnInit {
 
   disparaEventoToggle(){
     this.onToggle.emit();
+  }
+
+  encerrarApp(){
+    window.close();
   }
 }
