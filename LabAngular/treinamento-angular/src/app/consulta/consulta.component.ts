@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ConsultaService } from './consulta.service';
 
 @Component({
   selector: 'app-consulta',
@@ -6,25 +7,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./consulta.component.css']
 })
 
-export class ConsultaComponent implements OnInit {
-  consultas = {
-    realizadas: [
-      {'especialidade': 'Cardiologia', 'quantidade': 20 },
-      {'especialidade': 'Clínica Geral', 'quantidade': 30 },
-      {'especialidade': 'Dermatologia', 'quantidade': 14 },
-      {'especialidade': 'Gastroenterologia', 'quantidade': 10 },
-      {'especialidade': 'Pediatria', 'quantidade': 13 }
-    ],
-    marcadas: [
-      {'especialidade': 'Cardiologia', 'quantidade': 19 },
-      {'especialidade': 'Clínica Geral', 'quantidade': 28 },
-      {'especialidade': 'Dermatologia', 'quantidade': 13 },
-      {'especialidade': 'Gastroenterologia', 'quantidade': 8 },
-      {'especialidade': 'Pediatria', 'quantidade': 11 }
-    ]
-  };
+export class ConsultaComponent implements OnInit, OnDestroy {
 
-  constructor() { }
-  ngOnInit() { }
+  consultas;
+  inscricao;
+  erro;
+
+  constructor(private service: ConsultaService) { }
+  ngOnInit() {
+    this.inscricao = this.service.getConsultas()
+      .subscribe(data => this.consultas = data,
+        err => this.erro = true);
+  }
+
+  ngOnDestroy(): void {
+    this.inscricao.unsubscribe();
+  }
 
 }

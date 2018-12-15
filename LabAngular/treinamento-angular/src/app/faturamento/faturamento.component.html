@@ -1,0 +1,19 @@
+<app-painel-simples
+  titulo="Faturamento"
+  col="12"
+  tipo="primary">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Descrição</th>
+        <th>Valor</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let detalhe of faturamento?.detalhamento">
+        <td>{{detalhe.descricao}}</td>
+        <td>{{detalhe.valor}}</td>
+      </tr>
+    </tbody>
+  </table>
+  </app-painel-simples> 
